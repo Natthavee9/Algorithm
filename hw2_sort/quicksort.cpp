@@ -31,15 +31,16 @@ void quicksort(vector<int>&s,int l,int r){
     }
 }
 
-void swap(int a , int b){
+void swap(int &a , int &b){
     int temp = a;
     a = b;
     b = temp;
 }
 int main(){
     vector<int> a = {16,25,2,54,36,9,12,66};
+    int i;
     quicksort(a,0,a.size()-1);
-    for(int i = 0 ;i<a.size();i++){
+    for( i = 0 ;i<a.size();i++){
         cout << a[i] << " ";
     }
     cout<<"\n";  
