@@ -1,0 +1,42 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+bool check(vector<int>a , int value){
+    for(int i = 0;i<a.size();i++){
+        if(a[i] == value){
+            return true;
+        }
+    }
+    return false;
+}
+void output(vector<int>v){
+    for(int i = 0;i<v.size();i++){
+        cout << v[i]<< " ";
+    }
+}
+int main(){
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    vector<int> B(N);
+    for(int i =0 ;i<N;i++){
+        cin >> A[i];
+    }
+    
+    for(int i =0 ;i<N;i++){
+        cin >> B[i];
+    }
+
+    //intersec
+    vector<int> intersec;
+    for(int i =0 ;i<N;i++){
+        if(check(A,B[i]) && !check(intersec,B[i])){
+            intersec.push_back(B[i]);
+        }
+    }
+    output(intersec);
+
+    vector<int> uniion;
+        
+    
+}
