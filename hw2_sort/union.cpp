@@ -34,9 +34,22 @@ int main(){
             intersec.push_back(B[i]);
         }
     }
+    cout<<"intersec => ";
     output(intersec);
-
-    vector<int> uniion;
-        
+    cout<<"\n";
     
+    //union
+    vector<int> u_nion;
+    for(int i = 0;i<N;i++){
+        if(!check(u_nion,A[i])){
+            u_nion.push_back(A[i]);
+        }
+    }
+    for(int i = 0;i<N;i++){
+        if(!check(u_nion,B[i])){
+            u_nion.push_back(B[i]);
+        }
+    }
+    cout<< "union => ";
+    output(u_nion);
 }
