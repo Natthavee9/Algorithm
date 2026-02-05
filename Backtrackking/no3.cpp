@@ -2,6 +2,7 @@
 using namespace std;
 int  maxWei = 0 , maxVal = 0;
 int value[4] ,weight[4] ;
+
 void best(int x[], int n)
 {
     int sumValue = 0, sumWeight = 0;

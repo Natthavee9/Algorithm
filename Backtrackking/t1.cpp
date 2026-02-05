@@ -1,58 +1,65 @@
-#include<iostream>
-#include<string>
-using namespace std;
-void swap(string *a, string *b)
+#include <stdio.h>
+#include <math.h>   // เพิ่มเพื่อใช้ฟังก์ชัน abs() (ค่าสัมบูรณ์)
+#include <stdlib.h> // เพิ่มเพื่อใช้ฟังก์ชัน abs()
+
+void swap(int *a, int *b)
 {
-    string temp = *a;
+    int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-bool check(string x[], int n){
-    for(int i =1 ;i<n;i++){
-        if (x[i][0] == 'W' && x[i + 1][0] == 'W')
+// ฟังก์ชันใหม่: ตรวจสอบแนวทแยง
+// ถ้า X[i] คือตำแหน่งคอลัมน์ของควีนในแถวที่ i
+int check(int X[], int n)
+{
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = i + 1; j <= n; j++)
         {
-            return false;
-        }
-    }
-    return true;
-}
-
-/*void permute(int x[],int  start,int  end){
-    if(start == end){
-        for(int i = 1;i<=end;i++){
-            cout <<  x[i] << " ";
-        }
-        cout<<"\n";
-        return;
-    }
-
-    for(int i = start;i<=end;i++){
-        swap(&x[start] , &x[i]);
-        permute(x,start+1,end);
-        swap(&x[start], &x[i]);
-    }
-}*/
-
-void permuteC(string x[],int start,int end){
-    if(start == end){
-        if(check(x,end)){
-            for(int i=0 ;i<=end;i++){
-                cout << x[i]<<" ";
+            // เช็คว่าแนวทแยงชนกันหรือไม่
+            // สูตร: |row1 - row2| == |col1 - col2|
+            if (abs(i - j) == abs(X[i] - X[j]))
+            {
+                return 0; // ไม่ผ่าน (กินกันเอง)
             }
-            cout << "\n";
+        }
+    }
+    return 1; // ผ่าน (ปลอดภัย)
+}
+
+void permute(int X[], int start, int end)
+{
+    if (start == end)
+    {
+        // **จุดที่แก้**: ก่อนปริ้นท์ ต้องเช็คเงื่อนไขแนวทแยงก่อน
+        if (check(X, end))
+        {
+            printf("Solution: ");
+            for (int i = 1; i <= end; i++)
+            {
+                printf("%d ", X[i]);
+            }
+            printf("\n");
         }
         return;
     }
-    for(int i=start ; i<=end ;i++){
-        swap(&x[start],&x[i]);
-        permuteC(x,start+1,end);
-        swap(&x[start], &x[i]);
+
+    for (int i = start; i <= end; i++)
+    {
+        swap(&X[start], &X[i]);
+        permute(X, start + 1, end);
+        swap(&X[start], &X[i]);
     }
 }
-int main(){
-    int n =3;
-    //int x[] = {-1,1,2,3};
-    string y[] = {" ","W1", "W2", "M1"};
-    permuteC(y,1,n);
+
+int main()
+{
+    // **จุดที่แก้**: เปลี่ยน n เป็น 4 และเตรียม Array สำหรับ 4 ตัว
+    int n = 4;
+    int X[] = {-1, 1, 2, 3, 4}; // index 0 ไม่ใช้, เริ่มใช้ที่ index 1-4
+
+    permute(X, 1, n);
+
+    return 0;
 }
